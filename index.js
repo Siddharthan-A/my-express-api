@@ -8,9 +8,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// Welcome route
+// Welcome route (returns JSON)
 app.get('/', (req, res) => {
-  res.send('<h1>Welcome to my Express API 🚀</h1><p>Use /api/greet or /health</p>');
+  res.json({
+    status: 'success',
+    message: 'Welcome to my Express API 🚀',
+    available_routes: ['/', '/api/greet', '/health'],
+    time: new Date().toISOString()
+  });
 });
 
 // JSON greet API
@@ -24,7 +29,11 @@ app.get('/api/greet', (req, res) => {
 
 // Health check route
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
+  res.json({
+    status: 'ok',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Start the server
