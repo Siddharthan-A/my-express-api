@@ -24,3 +24,10 @@ jobs:
           context: . 
           push: true 
           tags: siddharthan6721/my-express-api:latest 
+
+                # 4. Trigger Render auto-deploy
+      - name: Trigger Render Deploy
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.RENDER_WEBHOOK_URL }}
+          method: POST
